@@ -15,7 +15,7 @@ test_input = [
     "01010",
 ]
 
-with open("inputs/03.txt") as file:
+with open("advent21/inputs/03.txt") as file:
     lines = file.readlines()
     puzzle_input = [line.rstrip() for line in lines]
 

@@ -1,6 +1,6 @@
 test_input = ["forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2"]
 
-with open("inputs/02.txt") as file:
+with open("advent21/inputs/02.txt") as file:
     lines = file.readlines()
     puzzle_input = [line.rstrip() for line in lines]
 

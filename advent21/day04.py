@@ -18,7 +18,7 @@ def _parse_input(
         List of drawn numbers.
         List of all playing boards.
     """
-    with open(f"inputs/{filename}") as file:
+    with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
         text_input = file.read()
     split = text_input.split("\n\n")
     return list(map(int, split[0].split(","))), _get_boards(split[1:])

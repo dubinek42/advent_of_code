@@ -1,6 +1,6 @@
 test_input = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
 
-with open("inputs/01.txt") as file:
+with open("advent21/inputs/01.txt") as file:
     lines = file.readlines()
     puzzle_input = [int(line.rstrip()) for line in lines]
 
