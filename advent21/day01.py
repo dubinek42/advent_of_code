@@ -6,11 +6,11 @@ with open("inputs/01.txt") as file:
 
 
 def increases(numbers):
-    return len([i for i in range(1, len(numbers)) if numbers[i] > numbers[i-1]])
+    return len([i for i in range(1, len(numbers)) if numbers[i] > numbers[i - 1]])
 
 
 def windows(numbers):
-    return [sum(numbers[i:i+3]) for i in range(0, len(numbers)-2)]
+    return [sum(numbers[i : i + 3]) for i in range(0, len(numbers) - 2)]
 
 
 print(increases(puzzle_input))
