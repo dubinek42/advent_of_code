@@ -1,3 +1,4 @@
+from collections import deque
 from typing import List, Tuple
 
 SCORES = {
@@ -19,7 +20,9 @@ def _parse_input(filename: str) -> List[str]:
 
 
 def _illegal(line: str) -> int:
-    stack = []
+    # Using Double ended queue provides time complexity O(1)
+    # for pop and append operations compared to list's O(n).
+    stack: deque = deque()
     for c in line:
         if c in ("(", "[", "{", "<"):
             stack.append(c)
@@ -36,7 +39,7 @@ def _illegal(line: str) -> int:
 
 
 def _incomplete(line: str) -> int:
-    stack = []
+    stack: deque = deque()
     for c in line:
         if c in ("(", "[", "{", "<"):
             stack.append(c)
