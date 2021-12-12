@@ -4,13 +4,51 @@
 #
 #    pip-compile --output-file=requirements.txt requirements.in
 #
+astroid==2.9.0
+    # via pylint
+attrs==21.2.0
+    # via pytest
+iniconfig==1.1.1
+    # via pytest
+isort==5.10.1
+    # via pylint
+lazy-object-proxy==1.6.0
+    # via astroid
+mccabe==0.6.1
+    # via pylint
 numpy==1.21.4
     # via
     #   -r requirements.in
     #   scipy
+packaging==21.3
+    # via pytest
+platformdirs==2.4.0
+    # via pylint
+pluggy==1.0.0
+    # via pytest
+py==1.11.0
+    # via pytest
 pydantic==1.8.2
+    # via -r requirements.in
+pylint==2.12.2
+    # via -r requirements.in
+pyparsing==3.0.6
+    # via packaging
+pytest==6.2.5
     # via -r requirements.in
 scipy==1.7.3
     # via -r requirements.in
+toml==0.10.2
+    # via
+    #   pylint
+    #   pytest
 typing-extensions==4.0.1
-    # via pydantic
+    # via
+    #   astroid
+    #   pydantic
+    #   pylint
+wrapt==1.13.3
+    # via astroid
+
+# The following packages are considered to be unsafe in a requirements file:
+# setuptools

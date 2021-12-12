@@ -1,3 +1,5 @@
 numpy
 pydantic
+pylint
+pytest
 scipy
