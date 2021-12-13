@@ -50,4 +50,4 @@ def fold_it_up(filename: str) -> tuple[int, int]:
     return dot_count, numpy.count_nonzero(paper)
 
 
-print(fold_it_up("day13.txt"))
+print(fold_it_up("13.txt"))

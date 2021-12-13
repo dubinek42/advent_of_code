@@ -57,4 +57,4 @@ def count_paths(filename: str) -> tuple[int, int]:
     return len(paths1), len(paths2)
 
 
-print(count_paths("day12.txt"))
+print(count_paths("12.txt"))

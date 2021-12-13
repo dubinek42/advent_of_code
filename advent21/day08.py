@@ -1,5 +1,3 @@
-from typing import List, Set, Tuple
-
 LE_HASH_MAP = {
     2: lambda *_: 1,
     3: lambda *_: 7,
@@ -10,7 +8,7 @@ LE_HASH_MAP = {
 }
 
 
-def _parse_input(filename: str) -> List[Tuple[List[str], List[Set[str]]]]:
+def _parse_input(filename: str) -> list[tuple[list[str], list[set[str]]]]:
     with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
         text_input = file.readlines()
     result = []
@@ -30,7 +28,7 @@ def _get_by_len(input_list: list, length: int) -> set:
     )
 
 
-def _decode(patterns: List[str], codes: List[set]) -> int:
+def _decode(patterns: list[str], codes: list[set]) -> int:
     four, seven, eight = map(_get_by_len, [patterns] * 3, [4, 3, 7])
     uniques = {c for c in eight if c not in four.union(seven)}
     digits = []

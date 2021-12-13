@@ -1,5 +1,4 @@
 import operator
-from typing import Set, Tuple
 
 import numpy
 
@@ -22,8 +21,8 @@ def _parse_input(filename: str) -> numpy.ndarray:
 
 
 def _flash(
-    grid: numpy.ndarray, coords: Tuple[int, int], flashed: Set[Tuple[int, int]]
-) -> Tuple[numpy.ndarray, set]:
+    grid: numpy.ndarray, coords: tuple[int, int], flashed: set[tuple[int, int]]
+) -> tuple[numpy.ndarray, set]:
     """Do the flash. Recursively calculate all flashes and return total number."""
     flashed.add(coords)
     for direction in NEIGHBORS_DIRECTIONS:
@@ -35,10 +34,10 @@ def _flash(
     return grid, flashed
 
 
-def _step(grid: numpy.ndarray) -> Tuple[numpy.ndarray, int]:
+def _step(grid: numpy.ndarray) -> tuple[numpy.ndarray, int]:
     """Make one step - increment all and determine flashes."""
     grid = numpy.vectorize(lambda q: q + 1)(grid)
-    flashed: Set[Tuple[int, int]] = set()
+    flashed: set[tuple[int, int]] = set()
     for x in range(len(grid)):
         for y in range(len(grid[x])):
             if grid[x][y] > 9 and (x, y) not in flashed:
@@ -68,9 +67,9 @@ def when_mega_flash(grid: numpy.ndarray) -> int:
     return steps
 
 
-def run(filename: str) -> Tuple[int, int]:
+def run(filename: str) -> tuple[int, int]:
     grid = _parse_input(filename)
     return count_flashes(grid, 100), when_mega_flash(grid)
 
 
-print(run("11.txt"))
+print(run("11_test.txt"))

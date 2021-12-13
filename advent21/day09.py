@@ -62,18 +62,16 @@ def _basin_size(area: numpy.ndarray, x: int, y: int) -> int:
     return _check_neighbors((x, y), set())
 
 
-def calculate_minima(filename: str) -> int:
-    area = _parse_input(filename)
+def calculate_minima(area: numpy.ndarray) -> int:
     minima = _find_minima(area)
     return int(numpy.sum(minima))
 
 
-def calculate_basins(filename: str) -> int:
-    area = _parse_input(filename)
+def calculate_basins(area: numpy.ndarray) -> int:
     minima_locations = list(zip(*numpy.where(_find_minima(area) == area + 1)))
     basin_sizes = sorted([_basin_size(area, *coords) for coords in minima_locations])
     return int(numpy.prod(basin_sizes[-3:]))
 
 
-print(calculate_minima("09.txt"))
-print(calculate_basins("09.txt"))
+print(calculate_minima(_parse_input("09.txt")))
+print(calculate_basins(_parse_input("09.txt")))

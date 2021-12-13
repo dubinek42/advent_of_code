@@ -1,5 +1,4 @@
 from collections import deque
-from typing import List, Tuple
 
 SCORES = {
     ")": 3,
@@ -13,7 +12,7 @@ SCORES = {
 }
 
 
-def _parse_input(filename: str) -> List[str]:
+def _parse_input(filename: str) -> list[str]:
     with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
         text_input = file.readlines()
     return [line.rstrip() for line in text_input]
@@ -53,7 +52,7 @@ def _incomplete(line: str) -> int:
     return score
 
 
-def run_checks(filename: str) -> Tuple[int, int]:
+def run_checks(filename: str) -> tuple[int, int]:
     lines = _parse_input(filename)
 
     final_illegal_score = sum(_illegal(line) for line in lines)

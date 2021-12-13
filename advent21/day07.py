@@ -1,16 +1,14 @@
-import typing
 from functools import lru_cache
+from typing import Callable
 
-test_input = [16, 1, 2, 0, 4, 2, 7, 1, 2, 14]
 
-
-def _parse_input(filename: str) -> typing.List[int]:
+def _parse_input(filename: str) -> list[int]:
     with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
         text_input = file.read()
     return [int(x) for x in text_input.split(",")]
 
 
-def _try_position(crabs: typing.List[int], position: int, fn: typing.Callable) -> int:
+def _try_position(crabs: list[int], position: int, fn: Callable) -> int:
     """Count fuel usage for position based on input function."""
     fuel = 0
     for crab in crabs:
@@ -24,7 +22,7 @@ def expensive_fuel(distance: int) -> int:
     return sum(range(distance + 1))
 
 
-def count_fuel(filename: str) -> typing.Tuple[int, int]:
+def count_fuel(filename: str) -> tuple[int, int]:
     crabs = _parse_input(filename)
     max_position = max(crabs)
     cheap = min(_try_position(crabs, i, lambda x: x) for i in range(max_position + 1))
