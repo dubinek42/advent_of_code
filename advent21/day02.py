@@ -1,15 +1,13 @@
 test_input = ["forward 5", "down 5", "forward 8", "up 3", "down 8", "forward 2"]
 
-with open("advent21/inputs/02.txt") as file:
-    lines = file.readlines()
-    puzzle_input = [line.rstrip() for line in lines]
+
+def _parse_input(filename: str) -> list[list[str]]:
+    with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
+        lines = file.readlines()
+    return [list(command.split(" ")) for command in [line.rstrip() for line in lines]]
 
 
-def parse_instructions(commands):
-    return [command.split(" ") for command in commands]
-
-
-def run_submarine(instructions):
+def run_submarine(instructions: list[list[str]]) -> int:
     horizontal = 0
     depth = 0
 
@@ -24,7 +22,7 @@ def run_submarine(instructions):
     return horizontal * depth
 
 
-def run_submarine2(instructions):
+def run_submarine2(instructions: list[list[str]]) -> int:
     horizontal = 0
     depth = 0
     aim = 0
@@ -41,5 +39,9 @@ def run_submarine2(instructions):
     return horizontal * depth
 
 
-print(run_submarine(parse_instructions(puzzle_input)))
-print(run_submarine2(parse_instructions(puzzle_input)))
+def run(filename: str) -> tuple[int, int]:
+    instructions = _parse_input(filename)
+    return run_submarine(instructions), run_submarine2(instructions)
+
+
+print(run("02.txt"))

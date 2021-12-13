@@ -1,17 +1,20 @@
-test_input = [199, 200, 208, 210, 200, 207, 240, 269, 260, 263]
+def _parse_input(filename: str) -> list[int]:
+    with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
+        lines = file.readlines()
+    return [int(line.rstrip()) for line in lines]
 
-with open("advent21/inputs/01.txt") as file:
-    lines = file.readlines()
-    puzzle_input = [int(line.rstrip()) for line in lines]
 
-
-def increases(numbers):
+def _increases(numbers: list[int]) -> int:
     return len([i for i in range(1, len(numbers)) if numbers[i] > numbers[i - 1]])
 
 
-def windows(numbers):
+def _windows(numbers: list[int]) -> list[int]:
     return [sum(numbers[i : i + 3]) for i in range(0, len(numbers) - 2)]
 
 
-print(increases(puzzle_input))
-print(increases(windows(puzzle_input)))
+def run(filename: str) -> tuple[int, int]:
+    puzzle_input = _parse_input(filename)
+    return _increases(puzzle_input), _increases(_windows(puzzle_input))
+
+
+print(run("01.txt"))

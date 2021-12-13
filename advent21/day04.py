@@ -1,4 +1,4 @@
-import typing
+from typing import Optional
 
 import numpy
 from pydantic import BaseModel
@@ -9,9 +9,7 @@ class Point(BaseModel):
     marked: bool = False
 
 
-def _parse_input(
-    filename: str,
-) -> typing.Tuple[typing.List[int], typing.List[numpy.ndarray]]:
+def _parse_input(filename: str) -> tuple[list[int], list[numpy.ndarray]]:
     """Parse text input into game turns and boards.
 
     Returns:
@@ -24,7 +22,7 @@ def _parse_input(
     return list(map(int, split[0].split(","))), _get_boards(split[1:])
 
 
-def _get_boards(boards: typing.List[str]) -> typing.List[numpy.ndarray]:
+def _get_boards(boards: list[str]) -> list[numpy.ndarray]:
     return [
         numpy.array(
             [
@@ -58,20 +56,18 @@ def _mark_point(turn: int, point: Point) -> Point:
     return point
 
 
-def _play_turn(
-    turn: int, boards: typing.List[numpy.ndarray]
-) -> typing.List[numpy.ndarray]:
+def _play_turn(turn: int, boards: list[numpy.ndarray]) -> list[numpy.ndarray]:
     """Mark points in all boards for current turn."""
     return numpy.vectorize(_mark_point)(turn, boards)
 
 
-def _get_score(turn: int, board: numpy.ndarray) -> typing.Optional[int]:
+def _get_score(turn: int, board: numpy.ndarray) -> Optional[int]:
     return turn * _sum_unmarked(board)
 
 
-def _pop_winning(boards: typing.List[numpy.ndarray]) -> tuple:
-    winning: typing.List[numpy.ndarray] = []
-    not_winning: typing.List[numpy.ndarray] = []
+def _pop_winning(boards: list[numpy.ndarray]) -> tuple:
+    winning: list[numpy.ndarray] = []
+    not_winning: list[numpy.ndarray] = []
     for board in boards:
         (not_winning, winning)[_check_win(board)].append(board)
     return winning, not_winning
@@ -93,4 +89,4 @@ def play_bingo(filename: str) -> tuple:
     return scores[0], scores[-1]
 
 
-print(play_bingo("04.txt"))
+print(play_bingo("04_test.txt"))

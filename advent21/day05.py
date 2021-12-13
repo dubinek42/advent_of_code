@@ -1,9 +1,9 @@
-import typing
+from typing import Callable, Optional
 
 import numpy
 
 
-def _parse_input(filename: str) -> typing.List[typing.List[typing.Tuple[int, ...]]]:
+def _parse_input(filename: str) -> list[list[tuple[int, ...]]]:
     with open(f"advent21/inputs/{filename}", encoding="utf-8") as file:
         lines = file.readlines()
     return [
@@ -17,9 +17,7 @@ def _parse_input(filename: str) -> typing.List[typing.List[typing.Tuple[int, ...
     ]
 
 
-def _get_size(
-    points: typing.List[typing.List[typing.Tuple[int, ...]]]
-) -> typing.Tuple[int, ...]:
+def _get_size(points: list[list[tuple[int, ...]]]) -> tuple[int, ...]:
     """Get max values of x and y from all coordinates.
 
     Reverse order for better vizualization.
@@ -30,7 +28,7 @@ def _get_size(
     )[::-1]
 
 
-def _draw_line(field: numpy.ndarray, points: typing.List[tuple]) -> numpy.ndarray:
+def _draw_line(field: numpy.ndarray, points: list[tuple]) -> numpy.ndarray:
     """Add 1 to points in field that underlay line constructed from pair of coords."""
     y, x = zip(*points)  # Work with reversed axes.
     # Swap axes if needed, so that we always have the "easier" axis as X.
@@ -52,8 +50,8 @@ def _draw_line(field: numpy.ndarray, points: typing.List[tuple]) -> numpy.ndarra
 
 
 def _draw_all_lines(
-    points: typing.List[typing.List[typing.Tuple[int, ...]]],
-    restriction: typing.Optional[typing.Callable],
+    points: list[list[tuple[int, ...]]],
+    restriction: Optional[Callable],
 ):
     field = numpy.zeros(_get_size(points))
     for pair in points:
@@ -67,12 +65,12 @@ def _count_overlaps(field: numpy.ndarray):
     return numpy.count_nonzero(field > 1)
 
 
-def _restriction(coords: typing.List[typing.Tuple[int, int]]) -> bool:
+def _restriction(coords: list[tuple[int, int]]) -> bool:
     """For first part of day 5: Filter only horizontal and vertical lines."""
     return coords[0][0] == coords[1][0] or coords[0][1] == coords[1][1]
 
 
-def find_overlaps(filename: str) -> typing.Tuple[int, int]:
+def find_overlaps(filename: str) -> tuple[int, int]:
     """Run the whole thing."""
     coord_pairs = _parse_input(filename)
     return (
