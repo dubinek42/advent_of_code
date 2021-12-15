@@ -67,19 +67,9 @@ def _a_star(start: Position, end: Position, cave: numpy.ndarray) -> int:
 
 
 def _multiply_cave(cave: numpy.ndarray, k: int) -> numpy.ndarray:
-    caves_horizontal = [cave]
-    last_cave = cave
-    for _ in range(k - 1):
-        new_cave = numpy.vectorize(lambda x: x + 1 if x < 9 else 1)(last_cave)
-        caves_horizontal.append(new_cave)
-        last_cave = new_cave
-    caves_vertical = [numpy.concatenate(caves_horizontal, axis=1)]
-    last_cave = caves_vertical[0]
-    for _ in range(k - 1):
-        new_cave = numpy.vectorize(lambda x: x + 1 if x < 9 else 1)(last_cave)
-        caves_vertical.append(new_cave)
-        last_cave = new_cave
-    return numpy.concatenate(caves_vertical, axis=0)
+    return numpy.block(
+        [[(cave + i + j - 1) % 9 + 1 for i in range(k)] for j in range(k)]
+    )
 
 
 def find_path(filename: str) -> int:
